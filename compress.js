@@ -10,9 +10,9 @@ async function compress(input, output) {
         let bytesWritten = 0;
 
         readStream
-            .on("data", buffer => bytesWritten += buffer.length)
             .on("error", error => reject(error))
             .pipe(gzip)
+            .on("data", buffer => bytesWritten += buffer.length)
             .on("error", error => reject(error))
             .pipe(writeStream)
             .on("error", error => reject(error))
